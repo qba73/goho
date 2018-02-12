@@ -51,12 +51,12 @@ func main() {
 	var buf bytes.Buffer
 	w := csv.NewWriter(&buf)
 
-	// todo: use cli args to specify csv file
-	csvFile, _ := os.Open("data.csv")
-
 	if err := w.Write([]string{"host", "ip"}); err != nil {
 		log.Fatal(err)
 	}
+
+	// todo: use cli args to specify csv file
+	csvFile, _ := os.Open("data.csv")
 
 	for rec := range processCSV(bufio.NewReader(csvFile)) {
 		// do IP lookup for each host in the csv row
